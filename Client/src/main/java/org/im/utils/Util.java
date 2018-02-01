@@ -42,7 +42,20 @@ public class Util {
             return defaultValue;
         }
 
-        return (T)val;
+        if(defaultValue instanceof Integer){
+            return (T) Integer.valueOf(val);
+        }else if (defaultValue instanceof Boolean){
+            return (T)Boolean.valueOf(val);
+        }else if (defaultValue instanceof Float){
+            return (T)Float.valueOf(val);
+        }else if (defaultValue instanceof Double){
+            return (T)Double.valueOf(val);
+        }else if (defaultValue instanceof Byte){
+            return (T)Byte.valueOf(val);
+        }else if (defaultValue instanceof Character){
+        }
+
+        return (T) val;
     }
 
     public static ClassLoader getClassLoader(){

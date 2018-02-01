@@ -8,6 +8,7 @@ module gui{
     requires javafx.graphics;
     requires dom4j;
     requires org.im.common;
+    requires javafx.controls;
     exports org.im;
     exports org.im.desktop.controller;
 }
