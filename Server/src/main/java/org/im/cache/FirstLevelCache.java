@@ -1,6 +1,5 @@
 package org.im.cache;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;

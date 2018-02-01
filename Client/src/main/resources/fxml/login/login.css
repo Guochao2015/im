@@ -1,0 +1,11 @@
+.anchorPane-background{
+    -fx-background-image: url("../../img/login/timg.jpg");
+}
+.anchorPane-pane{
+    -fx-background-color: #A9A9A9;
+    -fx-opacity: 0.6;
+}
+.head{
+    -fx-max-width: 60%;
+    -fx-max-height: 40%;
+}

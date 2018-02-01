@@ -9,15 +9,55 @@
     <module>Server</module>
     <module>Client</module>
     <module>common</module>
+    <!--  <module>demo</module>-->
   </modules>
-  <name>Maven Quick Start Archetype</name>
+  <name>im</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>5.0.0.Alpha1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.igniterealtime</groupId>
+      <artifactId>tinder-local</artifactId>
+      <version>1.3.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>dom4j</groupId>
+          <artifactId>dom4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru -->
+    <dependency>
+      <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
+      <artifactId>concurrentlinkedhashmap-lru</artifactId>
+      <version>1.0_jdk5</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.gnu.inet/libidn -->
+    <dependency>
+      <groupId>org.gnu.inet</groupId>
+      <artifactId>libidn</artifactId>
+      <version>1.15</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.7</version>
     </dependency>
   </dependencies>
 </project>
