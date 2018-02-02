@@ -15,21 +15,22 @@
             stylesheets="@login.css"
             xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.im.desktop.controller.Login">
+            fx:controller="org.im.desktop.controller.Login"
+>
    <children>
-      <Pane layoutY="183.0" prefHeight="217.0" prefWidth="600.0" styleClass="anchorPane-pane">
+      <Pane layoutY="183.0" styleClass="anchorPane-pane">
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="40.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/head.jpg" />
                </image>
             </ImageView>
-            <Label layoutX="201.0" layoutY="62.0"  text="账 号">
+            <Label layoutX="201.0" layoutY="62.0"  text="%accountNumber">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="203.0" layoutY="109.0"  text="密 码">
+            <Label layoutX="203.0" layoutY="109.0"  text="%password">
                <font>
                   <Font size="18.0" />
                </font>
@@ -38,9 +39,9 @@
             <PasswordField layoutX="268.0" layoutY="106.0" fx:id="password" />
             <Label layoutX="296.0" layoutY="14.0" fx:id="prompt" textFill="#ff0808" />
 
-            <Button layoutX="266.0" layoutY="162.0" mnemonicParsing="false" text="取消" />
+            <Button layoutX="266.0" layoutY="162.0" mnemonicParsing="false" text="%cancel" />
 
-            <Button layoutX="400.0" layoutY="162.0" mnemonicParsing="false" text="登录" onMouseClicked="#login" />
+            <Button layoutX="400.0" layoutY="162.0" mnemonicParsing="false" text="%login.text"  onMouseClicked="#login" />
          </children>
       </Pane>
    </children>
