@@ -29,9 +29,9 @@ public class PacketDecoder extends MessageToMessageDecoder<String>{
             Element rootElement = document.getRootElement();
             XMPPNodeType xmppNodeType = XMPPNodeType.valueOf(rootElement.getName());
             switch (xmppNodeType){
-                case IQ:         out.add(new IQ(rootElement));          break;
-                case PRESENCE:   out.add(new Presence(rootElement));    break;
-                case MESSAGE:   out.add(new Message(rootElement));      break;
+                case iq:         out.add(new IQ(rootElement));          break;
+                case presence:   out.add(new Presence(rootElement));    break;
+                case message:   out.add(new Message(rootElement));      break;
                 default: out.add(rootElement);
             }
         }
