@@ -4,6 +4,8 @@
 .anchorPane-pane{
     -fx-background-color: #A9A9A9;
     -fx-opacity: 0.6;
+    -fx-max-height: 50%;
+    -fx-max-width: 100%;
 }
 .head{
     -fx-max-width: 60%;
