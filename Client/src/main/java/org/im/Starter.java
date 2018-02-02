@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.im.fx.javaFXUtil;
 import org.im.netty.NettyClient;
 import org.im.utils.Util;
 
@@ -38,17 +40,31 @@ public class Starter extends Application {
         launch(args);
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
 
         setCLASS_URL();
+        /*Pane root = javaFXUtil.Load("fxml/login/login.fxml");
+        Scene scene = new Scene(root);*/
 
-        Pane root = FXMLLoader.load(Util.getURL("fxml/login/login.fxml"));
-        Scene scene = new Scene(root);
-        primaryStage.setResizable(false);
-        primaryStage.getIcons().add(new Image(Util.getClassInputStream("img/icon.jpg")));
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("IM");
-        primaryStage.show();
+        javaFXUtil.setPrimaryStage("root",stage);
+
+        Stage login = javaFXUtil.LoadStage(R.id.LOGIN, R.Layout.LOGIN);//StageStyle.UNDECORATED
+
+        login.setTitle(R.id.LOGIN);
+
+        login.setOnCloseRequest((event ) -> {
+            try {
+                NettyClient.INSTANCE.stop();
+            }finally {
+                System.exit(0);
+            }
+        });
+
+        login.setResizable(false);
+        login.getIcons().add(new Image(Util.getClassInputStream("img/icon.jpg")));
+
+        javaFXUtil.show(R.id.LOGIN);
+
     }
 
     public void setCLASS_URL(){
