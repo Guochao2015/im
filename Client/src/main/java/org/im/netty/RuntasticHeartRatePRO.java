@@ -25,7 +25,7 @@ public class RuntasticHeartRatePRO implements Runnable {
         try {
             while (true){
                 TimeUnit.SECONDS.sleep(5);
-                NettyClient.INSTANCE.writeAndFlush(iq);
+                NettyClient.INSTANCE.writeAndFlush(iq, null);
             }
         } catch (ConnectException e) {
             LOGGER.error(e.getMessage(),e);
