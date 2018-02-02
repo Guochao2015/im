@@ -20,6 +20,5 @@ public class JIDOfflineHandler implements EventHandler<JIDOfflineFactory.JIDOffl
         LOGGER.info("当前用户 [{}] 下线了",jidOffline.getJid());
 
         //通知与之相关的好友  下线了
-
     }
 }
