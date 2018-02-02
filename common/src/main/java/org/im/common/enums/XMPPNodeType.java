@@ -10,18 +10,18 @@ public enum XMPPNodeType {
      *  <persence type="available"/> or <persence/>  在线
      *  <persence type="unavailable"/>  离线
      */
-    PRESENCE("presence"),
+    presence("presence"),
 
     /**
      * 发送信息
      */
-    MESSAGE("message"),
+    message("message"),
     /**
      * 信息与查询 必须有 id
      */
-    IQ("iq"),
+    iq("iq"),
 
-    ERROR("error"),
+    error("error"),
     ;
     private String node;
     XMPPNodeType(String node){
