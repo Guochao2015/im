@@ -5,11 +5,14 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import org.im.desktop.controller.Controller;
 import org.im.netty.NettyClient;
+import org.im.utils.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xmpp.packet.IQ;
 import org.xmpp.packet.JID;
+import org.xmpp.packet.Packet;
 
 public class ClientHandler  extends ChannelHandlerAdapter{
 
@@ -35,7 +38,17 @@ public class ClientHandler  extends ChannelHandlerAdapter{
 
         System.out.println(msg);
 
-        super.channelRead(ctx, msg);
+        Packet packet = (Packet) msg;
+
+        String id = packet.getID();
+        Controller call = Util.getCallController(id);
+        if (call != null){
+            call.packetHandle(packet);
+        }else{
+            LOGGER.warn("没有找到可用的Controller 丢弃 [{}]",packet.toXML());
+        }
+
+//        super.channelRead(ctx, msg);
     }
 
     @Override
@@ -66,7 +79,7 @@ public class ClientHandler  extends ChannelHandlerAdapter{
         if (evt instanceof IdleStateEvent){
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.WRITER_IDLE){
-                NettyClient.INSTANCE.writeAndFlush(iq); //心跳
+                NettyClient.INSTANCE.writeAndFlush(iq, null); //心跳
             }
         }
     }
