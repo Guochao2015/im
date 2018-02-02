@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.im.common.CommonUtils;
 import org.im.common.packet.PacketEncoder;
 import org.im.common.packet.PacketDecoder;
+import org.im.desktop.controller.Controller;
 import org.im.netty.handler.ClientHandler;
 import org.im.utils.Util;
 import org.slf4j.Logger;
@@ -109,7 +110,11 @@ public enum NettyClient {
      * 断开连接
      */
     public void stop(){
-        channelFuture.channel().close();
+        try {
+            channelFuture.channel().close();
+        }catch (Exception e){
+            LOGGER.error(e.getMessage(),e);
+        }
         workgroup.shutdownGracefully();
         isConnection = false;
     }
@@ -129,7 +134,7 @@ public enum NettyClient {
         Presence logout = new Presence();
         logout.setType(Presence.Type.unavailable);
         try {
-            writeAndFlush(logout);
+            writeAndFlush(logout, null);
         } catch (ConnectException e) {
             LOGGER.info(e.getMessage(),e);
         }
@@ -148,12 +153,16 @@ public enum NettyClient {
     /**
      * 发送并推送到服务端
      * @param packet
+     * @param call
      * @return
      * @throws ConnectException
      */
-    public ChannelFuture writeAndFlush(Packet packet) throws ConnectException {
+    public ChannelFuture writeAndFlush(Packet packet, Controller call) throws ConnectException {
         if (!isConnection){
             throw new ConnectException("服务器连接断开");
+        }
+        if (call != null){
+            Util.setCallController(packet.getID(),call);
         }
         return  channelFuture.channel().writeAndFlush(packet);
     }
