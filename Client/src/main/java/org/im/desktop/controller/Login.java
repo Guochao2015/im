@@ -9,11 +9,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.im.netty.NettyClient;
 import org.im.utils.Util;
 import org.xmpp.packet.JID;
+import org.xmpp.packet.Packet;
 import org.xmpp.packet.Presence;
 
 import java.net.ConnectException;
 
-public class Login {
+public class Login implements Controller {
     public TextField accountNumber;
     public PasswordField password;
     public Label prompt;
@@ -28,12 +29,21 @@ public class Login {
         }
         NettyClient.INSTANCE.doConnection();
         Presence presence = new Presence();
-
         presence.setType(Presence.Type.subscribe);
         JID jid = new JID(an.concat("@").concat(Util.getPropVal("server.host", "127.0.0.1")));
         presence.setTo(jid);
-
         presence.setFrom(jid);
-        NettyClient.INSTANCE.writeAndFlush(presence);
+        NettyClient.INSTANCE.writeAndFlush(presence,this);
+    }
+
+    @Override
+    public void packetHandle(Packet packet) throws Exception {
+
+        System.out.println(" packetHandle  "+ packet.toXML());
+    }
+
+    @Override
+    public void call() throws Exception {
+
     }
 }
