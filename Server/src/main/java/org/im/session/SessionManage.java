@@ -101,7 +101,7 @@ public class SessionManage implements Session {
     }
 
     @Override
-    public void process(Packet packet) throws UnauthorizedException, PacketException {
+    public void process(Packet packet, ChannelHandlerContext ctx) throws UnauthorizedException, PacketException {
 
     }
 }
