@@ -29,7 +29,7 @@ public class BootInstantiationAwareBeanPostProcessor extends InstantiationAwareB
             FirstLevelCache.get("Handler").put(handlerInfo.xmlns(),bean);
         }
         Node node = bean.getClass().getAnnotation(Node.class);
-        if (!ObjectUtils.isEmpty(handlerInfo) && StringUtils.isNotBlank(node.element())){
+        if (!ObjectUtils.isEmpty(node) && StringUtils.isNotBlank(node.element())){
             FirstLevelCache.get("Handler").put(node.element(),bean);
         }
         return true;
