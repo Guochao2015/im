@@ -1,5 +1,6 @@
 package org.im.utils;
 
+import org.im.desktop.controller.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.WeakHashMap;
@@ -24,6 +26,8 @@ public class Util {
     private static final ResourceBundle CONFIG = ResourceBundle.getBundle("config");
 
     private static final Map<String,URL> CACHE_FXML = new WeakHashMap<>(20);
+
+    private static final Map<String,Controller> CONTROLLER_MAP = new HashMap<>();
 
     public  static String  CLASSES_URL;
     public static boolean isJar = false;
@@ -90,5 +94,12 @@ public class Util {
         }else {
             return ClassLoader.getSystemResourceAsStream(path);
         }
+    }
+
+    public static void setCallController(String key,Controller controller){
+        CONTROLLER_MAP.put(key,controller);
+    }
+    public static Controller getCallController(String key){
+        return CONTROLLER_MAP.remove(key);
     }
 }

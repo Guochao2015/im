@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class javaFXUtil {
 
@@ -35,6 +37,23 @@ public class javaFXUtil {
 
         Stage result = new Stage();
         Scene tempScene = new Scene(pane);
+        tempScene.setOnMousePressed((event)->{
+            System.out.println("setOnMousePressed");
+            event.consume();
+            controller.xOffset = event.getSceneX();
+            controller.yOffset = event.getSceneY();
+        });
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        tempScene.setOnMouseDragged((event)->{
+            System.out.println("setOnMouseDragged");
+            executorService.submit(()->{
+                event.consume();
+                System.out.println("[x = "+ event.getSceneX() +"],[ y = "+ event.getSceneY() +"]");
+                result.setX(event.getSceneX() - controller.xOffset);
+                result.setY(event.getSceneY() - controller.yOffset);
+            });
+        });
+
         result.setScene(tempScene);
         for (StageStyle style : stageStyles)
             result.initStyle(style);

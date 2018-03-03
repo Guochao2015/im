@@ -48,7 +48,7 @@ public class Starter extends Application {
 
         javaFXUtil.setPrimaryStage("root",stage);
 
-        Stage login = javaFXUtil.LoadStage(R.id.LOGIN, R.Layout.LOGIN);//StageStyle.UNDECORATED
+        Stage login = javaFXUtil.LoadStage(R.id.LOGIN, R.Layout.LOGIN,StageStyle.UNDECORATED);//StageStyle.UNDECORATED
 
         login.setTitle(R.id.LOGIN);
 

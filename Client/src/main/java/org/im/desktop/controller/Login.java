@@ -14,7 +14,7 @@ import org.xmpp.packet.Presence;
 
 import java.net.ConnectException;
 
-public class Login implements Controller {
+public class Login extends Controller {
     public TextField accountNumber;
     public PasswordField password;
     public Label prompt;
@@ -38,7 +38,6 @@ public class Login implements Controller {
 
     @Override
     public void packetHandle(Packet packet) throws Exception {
-
         System.out.println(" packetHandle  "+ packet.toXML());
     }
 
