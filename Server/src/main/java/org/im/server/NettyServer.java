@@ -55,16 +55,21 @@ public class NettyServer {
         bootstrap.group(bossGroup,workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG,backlog)
-                .option(ChannelOption.SO_RCVBUF,1024) //接受缓冲区
-                .option(ChannelOption.SO_SNDBUF,1024) //发送缓冲区
+                //接受缓冲区
+                .option(ChannelOption.SO_RCVBUF,1024)
+                //发送缓冲区
+                .option(ChannelOption.SO_SNDBUF,1024)
                 .childOption(ChannelOption.SO_KEEPALIVE,true)
                 .childOption(ChannelOption.TCP_NODELAY,true)
                 .handler(new LoggingHandler(LogLevel.DEBUG))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
+                    @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ch.pipeline()
-                                .addLast(new IdleStateHandler(10,0,0, TimeUnit.SECONDS))//心跳检测
-                                .addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer(CommonUtils.LIMITER.getBytes("UTF-8"))))//为了解决粘包
+                                //心跳检测
+                                .addLast(new IdleStateHandler(10,0,0, TimeUnit.SECONDS))
+                                //为了解决粘包
+                                .addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer(CommonUtils.LIMITER.getBytes("UTF-8"))))
                                 .addLast(new StringEncoder(Charset.forName("UTF-8")))
                                 .addLast(new StringDecoder(Charset.forName("UTF-8")))
                                 .addLast(new PacketDecoder(CommonUtils.LIMITER))

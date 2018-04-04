@@ -56,8 +56,6 @@ public class IMChannelHandler extends ChannelHandlerAdapter {
     public void disconnect(ChannelHandlerContext ctx, ChannelPromise promise) throws Exception {
         super.disconnect(ctx, promise);
         Attribute<SessionManage> attr = ctx.attr(Utils.SESSION_KEY);
-
-
         if (!ObjectUtils.isEmpty(attr) && !ObjectUtils.isEmpty(attr.get())){
             //login attr.setIfAbsent(new SessionManage());
             SessionManage sessionManage = attr.get();
